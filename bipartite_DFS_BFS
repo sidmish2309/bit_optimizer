@@ -1,0 +1,110 @@
+// index if 1 for the graph
+
+//DFS
+bool bipartite_dfs(int node, vector<int>A[], int color[])
+    {
+        if(color[node]==-1) color[node]=1;
+        for(auto child:A[node])
+        {
+            if(color[child]==-1)
+            {
+                color[child]=1-color[node];
+                if(!bipartite_dfs(child,A,color)) return false;
+            }
+            
+            else if(color[child]==color[node]) return false;
+        }
+        return true;
+    }
+    --------------------------------------------------------------------------------
+        ll n, m;
+        cin>>n>>m;
+        vi A[n+1];
+        ll flag=1;
+        while(m--)
+        {
+          ll u,v;
+          cin>>u>>v;
+          A[u].pb(v);
+          A[v].pb(u);
+        }
+        
+        int color[n+1];
+	    memset(color,-1,sizeof(color));
+	    for(int i=1; i<=n; i++)
+	    {
+	        if(color[i]==-1)
+	        {
+	            if(!bipartite_dfs(i,A,color))
+	            {
+                flag=0;
+                break;
+              }
+	        }
+	    }
+      
+      if(flag)
+      yes;
+      else
+      no;
+ 
+        
+          
+    *****************************************************************************************************
+    // BFS
+  
+    bool bipartite(ll src, vi A[], ll color[])
+    {
+      queue<int>q;
+      q.push(src);
+      color[src]=1;
+      while(!q.empty())
+      {
+        int node=q.front();
+        q.pop();
+        for(auto child:A[node])
+        {
+          if(color[child]==-1)
+          {
+            color[child]=1-color[node];
+            q.push(child);
+          }
+
+          else if(color[child]==color[node]) return false;
+        }
+      }
+      return true;
+    }
+ 
+    --------------------------------------------------------------------------------
+     ll n,m;
+      cin>>n>>m;
+      ll flag=1;
+      vi A[n+1];
+      
+      while(m--)
+      {
+        int u,v;
+        cin>>u>>v;
+        A[u].pb(v);
+        A[v].pb(u);
+      }
+
+      ll color[n+1];
+      memset(color,-1,sizeof(color));
+ 
+      repe(i,1,n)
+      {
+        if(color[i]==-1)
+        {
+          if(!bipartite(i,A,color))
+          flag=0;
+          break;
+        }
+      }
+
+      if(flag)
+        yes;
+      else
+        no;
+          
