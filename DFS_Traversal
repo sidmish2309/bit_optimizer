@@ -1,4 +1,7 @@
 //Consider 1 base indexing of node
+//TC->O(V+E)
+//SC->O(V)+O(V)+O(V+E)
+
 
 void dfs(int node, vector<int> adj[],int vis[],vector<int> &ans)
   {
