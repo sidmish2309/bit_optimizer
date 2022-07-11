@@ -1,0 +1,30 @@
+//Consider the indexing of node--> This is 1 base index
+```
+vector<int> bfsOfGraph(int V, vector<int> A[]) {
+        vector<int> bfs, vis(V+1,0);
+        for(int i=1; i<=V; i++)
+        {
+            if(!vis[i])
+            {
+                queue<int>q;
+                q.push(i);
+                vis[i]=1;
+                while(!q.empty())
+                {
+                    int node=q.front();
+                    q.pop();
+                    bfs.push_back(node);
+                    for(auto child:A[node])
+                    {
+                        if(!vis[child])
+                        {
+                            vis[child]=1;
+                            q.push(child);
+                        }
+                    }
+                }
+            }
+        }
+        return bfs;
+    }
+    ```
