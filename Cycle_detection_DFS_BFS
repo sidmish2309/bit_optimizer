@@ -1,0 +1,95 @@
+//Consider node with 1 indexing
+
+//Firstly DFS
+//TC->O(V+E)
+//SC->O(V+E)+O(V)+O(V)
+
+bool dfs(int node, vector<int> adj[], int vis[], int par)
+    {
+        vis[node]=1;
+        for(auto child:adj[node])
+        {
+            if(!vis[child])
+            {
+                if(dfs(child,adj,vis,node)) return true;
+            }
+            
+            else if(vis[child]==1 && par==child) continue;
+            else if(vis[child] && child!=par) return true;
+            
+        }
+         return false;
+    }
+    bool isCycle(int V, vector<int> adj[]) {
+        int vis[V+1]={0};
+        for(int i=1; i<=V; i++)
+        {
+            if(!vis[i])
+            {
+               if(dfs(i,adj,vis,-1)) return true; 
+            }
+            
+        }
+        
+        return false;
+    }
+    
+   ***************************************************************************************************************************************************************** 
+    
+    
+//Now, BFS
+//TC->O(V+E)
+//SC->O(V+E)+O(V)+O(V)
+
+ bool check_cycle(int source,vi A[], vi &vis)
+    {
+    queue<pair<int,int>>q;
+    vis[source]=1;
+    q.push({source,-1});
+    while(!q.empty())
+    {
+        int node=q.front().first;
+        int pre=q.front().second;
+        q.pop();
+        for(auto child:A[node])
+        {
+            if(!vis[child])
+            {
+                vis[child]=1;
+                q.push({child,node});
+            }
+            
+            else if(child==pre) continue;
+            else if(child!=pre) return true;
+        }
+    }
+    return false;
+    }
+    --------------------------------------------------------
+      int n,m;
+      cin>>n>>m;
+      vi vis(n+1,0);
+      vi A[n+1];
+      ll flag=0;
+      while(m--)
+      {
+        int u,v;
+        cin>>u>>v;
+        A[u].pb(v);
+        A[v].pb(u);
+      }
+      for(int i=1; i<=n; i++)
+        {
+          if(!vis[i])
+          {
+            if(check_cycle(i,A,vis))
+              {
+                flag=1;
+                break;
+              }
+          }
+        }
+        if(flag)
+          yes;
+        else
+          no;
