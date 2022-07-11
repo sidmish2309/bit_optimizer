@@ -1,5 +1,7 @@
 //Consider the indexing of node--> This is 1 base index
-```
+//TC->O(V+E)
+//SC->O(V)+O(V)+O(V+E)
+
 vector<int> bfsOfGraph(int V, vector<int> A[]) {
         vector<int> bfs, vis(V+1,0);
         for(int i=1; i<=V; i++)
@@ -27,4 +29,4 @@ vector<int> bfsOfGraph(int V, vector<int> A[]) {
         }
         return bfs;
     }
-    ```
+
