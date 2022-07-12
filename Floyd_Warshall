@@ -1,0 +1,56 @@
+//O(V^3)
+// Adjacency matrix form ques
+
+void shortest_distance(vector<vector<int>>&d){
+	     int n = d.size();
+	    for(int k=0;k<n;k++){
+	        for(int i=0;i<n;i++){
+	            for(int j=0;j<n;j++){
+	                if(d[i][k]==-1 || d[k][j]==-1)continue;
+	                if(d[i][j]==-1)   d[i][j] = d[i][k] + d[k][j];
+	                else d[i][j] = min(d[i][j],d[i][k] + d[k][j]);
+	            }
+	        }
+	    }
+	}
+  
+  **************************************************************************************************
+  //O(V^3)
+// Adjacency List form ques
+  ll n,m;
+      cin>>n>>m;
+      ll d[n+1][n+1];
+      rep(i,0,n+1)
+      {
+        rep(j,0,n+1)
+        {
+          if(i==j) d[i][j]=0;
+          else
+            d[i][j]=1e9;
+        }
+      }
+
+      while(m--)
+      {
+        ll u,v,w;
+        cin>>u>>v>>w;
+        d[u][v]=w;
+      }
+
+      repe(k,1,n)
+      repe(i,1,n)
+      repe(j,1,n)
+      {
+        d[i][j]=min(d[i][j],d[i][k]+d[k][j]);
+      }
+
+      rep(i,1,n+1)
+      {
+        rep(j,1,n+1)
+        {
+          if(d[i][j]==1e9) cout<<"I"<<" ";
+          else
+            cout<<d[i][j]<<" ";
+        }
+        cout<<endl;
+      }
